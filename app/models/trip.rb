@@ -1,4 +1,5 @@
 class Trip < ApplicationRecord
-    has_many_attached :images
+    has_one_attached :image
+    has_many :checkpoints
     belongs_to :user    
 end
