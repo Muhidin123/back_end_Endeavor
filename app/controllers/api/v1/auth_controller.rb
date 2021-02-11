@@ -7,7 +7,6 @@ class Api::V1::AuthController < ApplicationController
           payload = { user_id: user.id }
           token = JWT.encode(payload, "secret", 'HS256')
           render json: { user: {id: user.id, username: user.username, name: user.first_name ,token: token}}
-
       else
         render json: { error: 'Invalid username or password.' }, status: 401
       end
@@ -21,7 +20,7 @@ class Api::V1::AuthController < ApplicationController
         decoded_token = JWT.decode(token, "secret" , true, { algorithm: 'HS256' })
         user_id = decoded_token[0]['user_id']
         user = User.find(user_id)
-        render json: { user: {id: user.id, username: user.username, name: user.first_name , token: token}}
+        render json: { user: {id: user.id, username: user.username, name:  user.first_name , token: token}}
       end
     end
 end

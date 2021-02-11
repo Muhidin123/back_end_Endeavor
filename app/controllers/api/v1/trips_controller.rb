@@ -23,16 +23,18 @@ class Api::V1::TripsController < ApplicationController
     end
 
     private
-      def trip_params
-        params.require(:trip).permit(:title, :destination_name, :longitude, :latitude, :user_id, :public, :note, :start, :end, :image)
-      end
+  
+    def trip_params
+      params.require(:trip).permit(:title, :destination_name, :longitude, :latitude, :user_id, :public, :note, :start, :end, :image)
+    end
 
-      def image_io
-        decoded_image = Base64.decode64(params[:trip][:image])
-         StringIO.new(decoded_image)
-      end
+    def image_io
+      decoded_image = Base64.decode64(params[:trip][:image])
+        StringIO.new(decoded_image)
+    end
       
-      def image_name
-        params[:trip][:file_name]
-      end
+    def image_name
+      params[:trip][:file_name]
+    end
+    
 end
