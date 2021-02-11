@@ -15,8 +15,7 @@ class Api::V1::TripsController < ApplicationController
         trip = Trip.new(trip_params)
         trip.image.attach(io: image_io, filename: image_name)
         if trip.save
-          url = url_for(trip.image)
-          render json: {trip: trip, image: url}
+          render json: trip
         else
           render json: {error: "DID NOT SAVE"}
         end

@@ -10,4 +10,3 @@ class TripSerializer < ActiveModel::Serializer
     end
 
 end
-  
