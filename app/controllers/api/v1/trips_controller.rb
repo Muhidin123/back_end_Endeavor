@@ -24,7 +24,7 @@ class Api::V1::TripsController < ApplicationController
     private
   
     def trip_params
-      params.require(:trip).permit(:title, :destination_name, :longitude, :latitude, :user_id, :public, :note, :start, :end, :image)
+      params.require(:trip).permit(:title, :destination_name, :longitude, :latitude, :user_id, :public, :note, :start, :end, :image, :latitude_delta, :longitude_delta,)
     end
 
     def image_io

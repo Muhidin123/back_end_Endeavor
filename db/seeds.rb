@@ -7,10 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-# require 'faker'
+# # require 'faker'
+# Trip.delete_all
+# Checkpoint.delete_all
 
-
-
-# 10.times do
-# Trip.create(title: Faker::Name.first_name, longitude: -87.65005, latitude: 41.85003, public: true, start: '2021-02-20T00:34:00.000Z', end: '2021-02-20T00:34:00.000Z', destination_name: Faker::Name.first_name, note: Faker::String.random(length: 3..12), user_id: User.first.id)
-# end

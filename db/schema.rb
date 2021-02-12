@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_11_170250) do
+ActiveRecord::Schema.define(version: 2021_02_12_173237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,8 +38,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_170250) do
 
   create_table "checkpoints", force: :cascade do |t|
     t.bigint "trip_id", null: false
-    t.date "date"
-    t.time "time"
+    t.datetime "date"
     t.string "destination_name"
     t.string "title"
     t.float "longitude"
@@ -48,6 +47,8 @@ ActiveRecord::Schema.define(version: 2021_02_11_170250) do
     t.text "note"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "latitude_delta"
+    t.float "longitude_delta"
     t.index ["trip_id"], name: "index_checkpoints_on_trip_id"
   end
 
@@ -72,6 +73,8 @@ ActiveRecord::Schema.define(version: 2021_02_11_170250) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
+    t.float "latitude_delta"
+    t.float "longitude_delta"
     t.index ["user_id"], name: "index_trips_on_user_id"
   end
 

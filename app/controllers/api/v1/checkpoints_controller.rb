@@ -7,7 +7,7 @@ class Api::V1::CheckpointsController < ApplicationController
 
     def create
         checkpoint = Checkpoint.new(checkpoint_params)
-        checkpoint.image.attach(io: image_io, filename: image_name)        
+        checkpoint.picture.attach(io: image_io, filename: image_name)
 
         if checkpoint.save
             render json: checkpoint
@@ -32,15 +32,17 @@ class Api::V1::CheckpointsController < ApplicationController
 
 
     def checkpoint_params
-        params.require(:checkpoint).permit(:trip_id, :longitude, :latitude, :description, :note, :title, :time, :date)
+        params.require(:checkpoint).permit(:trip_id, :longitude, :latitude, :description, 
+            :note, :title,:date, :latitude_delta, :longitude_delta,
+            :destination_name, :picture,)
     end
 
     def image_io
-        decoded_image = Base64.decode64(params[:trip][:image])
+        decoded_image = Base64.decode64(params[:checkpoint][:picture])
         StringIO.new(decoded_image)
     end
       
     def image_name
-        params[:trip][:file_name]
+        params[:checkpoint][:file_name]
     end
 end
