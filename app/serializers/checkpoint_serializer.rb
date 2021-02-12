@@ -1,10 +1,10 @@
 class CheckpointSerializer < ActiveModel::Serializer
-    attributes :id, :note, :description, :destination_name, :date, :time, :longitude, :latitude, :image
+    include Rails.application.routes.url_helpers
+    attributes :id, :note, :description, :destination_name, :date, :latitude_delta, :longitude_delta, :longitude, :latitude, :image
 
 
     def image
-         url_for(object.image) if object.image.attached?
+         url_for(object.picture) if object.picture.attached?
     end
-    
 end
   
