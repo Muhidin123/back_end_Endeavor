@@ -1,6 +1,6 @@
 class CheckpointSerializer < ActiveModel::Serializer
     include Rails.application.routes.url_helpers
-    attributes :id, :note, :description, :destination_name, :date, :latitude_delta, :longitude_delta, :longitude, :latitude, :image
+    attributes :id, :note, :description, :destination_name, :date, :latitude_delta, :longitude_delta, :longitude, :latitude, :image, :trip_id
 
 
     def image
