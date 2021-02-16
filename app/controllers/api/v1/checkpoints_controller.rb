@@ -28,6 +28,14 @@ class Api::V1::CheckpointsController < ApplicationController
     end
 
 
+    def destroy
+        checkpoint = Checkpoint.find(params[:id])
+        checkpoint.destroy
+
+        render json: {success: "DESTROYED CHECKPOINT"}
+    end
+
+
     private
 
 
