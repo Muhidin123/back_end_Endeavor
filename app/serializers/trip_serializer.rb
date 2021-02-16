@@ -1,6 +1,6 @@
 class TripSerializer < ActiveModel::Serializer
     include Rails.application.routes.url_helpers
-    attributes :id, :title, :destination_name, :start, :end, :note, :image, :latitude_delta, :longitude_delta, :longitude, :latitude, :checkpoints
+    attributes :id, :title, :destination_name, :start, :end, :note, :image, :latitude_delta, :longitude_delta, :longitude, :latitude, :checkpoints, :user_id
                            
     # belongs_to :user
     has_many :checkpoints
