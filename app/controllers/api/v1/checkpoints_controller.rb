@@ -7,7 +7,9 @@ class Api::V1::CheckpointsController < ApplicationController
 
     def create
         checkpoint = Checkpoint.new(checkpoint_params)
-        checkpoint.picture.attach(io: image_io, filename: image_name)
+        
+        image_io ? checkpoint.picture.attach(io: image_io, filename: image_name) : checkpoint.picture.attach(io: File.open(Rails.root.join('no_image_default.png')), filename: 'default-image.png', content_type: 'image/
+        png')
 
         if checkpoint.save
             render json: checkpoint
@@ -31,8 +33,7 @@ class Api::V1::CheckpointsController < ApplicationController
     def destroy
         checkpoint = Checkpoint.find(params[:id])
         checkpoint.destroy
-
-        render json: {success: "DESTROYED CHECKPOINT"}
+        render json: {success: 'Deleted checkpoint'}
     end
 
 
@@ -46,8 +47,11 @@ class Api::V1::CheckpointsController < ApplicationController
     end
 
     def image_io
-        decoded_image = Base64.decode64(params[:checkpoint][:picture])
-        StringIO.new(decoded_image)
+        if params[:checkpoint][:picture]
+            decoded_image = Base64.decode64(params[:checkpoint][:picture])
+            StringIO.new(decoded_image)
+        end
+        nil
     end
       
     def image_name

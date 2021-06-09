@@ -13,7 +13,8 @@ class Api::V1::TripsController < ApplicationController
 
     def create
         trip = Trip.new(trip_params)
-        image_io ? trip.image.attach(io: image_io, filename: image_name) : trip.image.attach(io: File.open(Rails.root.join('no_image_default.png')), filename: 'default-image.png', content_type: 'image/png')
+        image_io ? trip.image.attach(io: image_io, filename: image_name) : trip.image.attach(io: File.open(Rails.root.join('no_image_default.png')), filename: 'default-image.png', content_type: 'image/
+        png')
         if trip.save
           render json: trip
         else
