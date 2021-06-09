@@ -13,7 +13,7 @@ class Api::V1::TripsController < ApplicationController
 
     def create
         trip = Trip.new(trip_params)
-        trip.image.attach(io: image_io, filename: image_name)
+        image_io ? trip.image.attach(io: image_io, filename: image_name) : trip.image.attach(io: File.open(Rails.root.join('no_image_default.png')), filename: 'default-image.png', content_type: 'image/png')
         if trip.save
           render json: trip
         else
@@ -28,10 +28,13 @@ class Api::V1::TripsController < ApplicationController
     end
 
     def image_io
-      decoded_image = Base64.decode64(params[:trip][:image])
-        StringIO.new(decoded_image)
+      if params[:trip][:image]
+        decoded_image = Base64.decode64(params[:trip][:image])
+        return StringIO.new(decoded_image)
+      end
+      nil
     end
-      
+
     def image_name
       params[:trip][:file_name]
     end
